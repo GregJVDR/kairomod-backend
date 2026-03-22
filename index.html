@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="preload" href="marbre.jpg" as="image">
+  <link rel="icon" type="image/png" href="./images/drapeau-france.png">
+  <link rel="shortcut icon" href="./images/drapeau-france.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/drapeau-france.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="KaïroMod – Crée ta montre Seiko Mod sur mesure">
+  <meta property="og:description" content="Personnalise ta montre d'exception – Santos, Nautilus, Datejust... meilleurs Seiko Mod, assemblage à la main 🇫🇷">
+  <meta property="og:image" content="https://ton-site.com/images/preview.jpg">
+  <meta property="og:url" content="https://kairomod.fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KaïroMod">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KaïroMod – Montres personnalisées haut de gamme">
+  <meta name="twitter:description" content="Crée ta montre Seiko Mod unique. Collection Santos / Nautilus / Datejust.">
+  <meta name="twitter:image" content="https://kairomod.fr/images/preview.jpg">
+  <title>KaïroMod</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================================
+       KAÏROMOD — MARBLE WHITE LUXURY REDESIGN 2025
+    ============================================================ */
+    :root {
+      --accent:      #ff7b00;
+      --accent-dark: #d95f00;
+      --dark:        #1a1a1a;
+      --mid:         #666;
+      --light:       #f8f6f3;
+      --white:       #ffffff;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', sans-serif;
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.07);
+      --shadow-md: 0 8px 28px rgba(0,0,0,0.13);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.2);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: clamp(13px, 1vw + 0.5vh, 17px); scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: var(--white); color: var(--dark); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; opacity: 1; transition: opacity 0.38s ease; }
+    body.fade-out { opacity: 0; }
+    *, a, button { -webkit-tap-highlight-color: transparent; outline: none !important; user-select: none; }
+    input, textarea { user-select: text !important; }
+
+    /* ======== NAVBAR ======== */
+    .apple-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 58px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      z-index: 9999; display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 0.4s ease;
+    }
+    .apple-nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.1); }
+    .apple-nav-content {
+      width: 100%; max-width: 1400px; padding: 0 40px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    }
+    .apple-nav-logo { justify-self: start; }
+    .apple-nav-logo img { height: 140px; margin-top: 14px; object-fit: contain; transition: opacity 0.3s; }
+    .apple-nav-logo img:hover { opacity: 0.7; }
+    .apple-nav-links { list-style: none; display: flex; align-items: center; gap: 36px; justify-self: center; }
+    .apple-nav-links a {
+      text-decoration: none; font-family: var(--font-body);
+      font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase;
+      color: rgba(26,26,26,0.55); transition: color 0.25s; position: relative;
+    }
+    .apple-nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1.5px; background: var(--accent);
+      transition: width 0.3s var(--ease);
+    }
+    .apple-nav-links a:hover { color: var(--dark); }
+    .apple-nav-links a:hover::after { width: 100%; }
+    .apple-nav-icons { justify-self: end; display: flex; align-items: center; gap: 20px; }
+    .apple-nav-icons a { color: rgba(26,26,26,0.5); text-decoration: none; font-size: 15px; transition: color 0.25s; }
+    .apple-nav-icons a:hover { color: var(--accent); }
+    .made-in-france-nav { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: rgba(26,26,26,0.35); margin-left: 8px; white-space: nowrap; }
+    .made-in-france-nav img { height: 11px; border-radius: 2px; box-shadow: 0 0 3px rgba(0,0,0,0.2); }
+    @media (max-width: 900px) { .apple-nav-links { display: none; } .apple-nav-content { grid-template-columns: auto 1fr auto; } }
+    @media (max-width: 600px) { .apple-nav { height: 52px; } .apple-nav-logo img { height: 55px; margin-top: 0; } .apple-nav-content { padding: 0 18px; } .made-in-france-nav span { display: none; } }
+
+    /* ======== HERO ======== */
+    .hero-section {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.42), rgba(0,0,0,0.42)),
+                  url('images/marbre.jpg') center/cover no-repeat;
+      transform: scale(1.06);
+      transition: transform 7s var(--ease);
+    }
+    .hero-section.loaded .hero-bg { transform: scale(1); }
+
+    /* Watermark fond.png */
+    .hero-section::after {
+      content: "";
+      position: absolute; top: 35%; left: 50%;
+      width: 160%; height: 160%;
+      background: url("images/fond.png") center/contain no-repeat;
+      opacity: 0.08; transform: translate(-50%, -50%);
+      pointer-events: none; z-index: 1; filter: brightness(10);
+    }
+    /* Bottom fade */
+    .hero-section::before {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 100%; height: 200px;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.28));
+      pointer-events: none; z-index: 2;
+    }
+    .hero-content { position: relative; z-index: 3; max-width: 820px; padding: 0 28px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--font-body); font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); margin-bottom: 26px;
+      opacity: 0; transform: translateY(18px);
+      animation: revealUp 0.8s var(--ease) forwards 0.3s;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: rgba(255,255,255,0.45); }
+
+    .hero-title {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(3rem, 5.5vw, 6rem); line-height: 1.08;
+      letter-spacing: 1px; text-transform: uppercase; color: #fff;
+      margin-bottom: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      opacity: 0; transform: translateY(30px);
+      animation: revealUp 1s var(--ease) forwards 0.5s;
+    }
+    .hero-title-line {
+      display: block; width: 100px; height: 2px; margin: 20px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+      transform: scaleX(0); opacity: 0;
+      animation: lineExpand 1s var(--ease) forwards 1.2s;
+    }
+    @keyframes lineExpand { to { transform: scaleX(1); opacity: 1; } }
+
+    .hero-subtitle {
+      font-family: var(--font-body); font-size: clamp(1rem, 1.6vw, 1.18rem);
+      font-weight: 300; letter-spacing: 0.4px; color: rgba(255,255,255,0.75);
+      max-width: 560px; margin: 28px auto 44px; line-height: 1.85;
+      opacity: 0; transform: translateY(24px);
+      animation: revealUp 0.9s var(--ease) forwards 0.75s;
+    }
+
+    .cta-wrapper {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; transform: translateY(20px);
+      animation: revealUp 0.9s var(--ease) forwards 1s;
+    }
+    .cta-button {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 46px; background: var(--accent); color: #fff;
+      text-decoration: none; border-radius: 3px;
+      font-family: var(--font-body); font-weight: 600; font-size: 12.5px;
+      letter-spacing: 2px; text-transform: uppercase; border: none;
+      position: relative; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(255,123,0,0.4);
+      transition: all 0.4s var(--ease);
+    }
+    .cta-button::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--accent-dark); transform: translateX(-101%);
+      transition: transform 0.4s var(--ease);
+    }
+    .cta-button:hover::before { transform: translateX(0); }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,123,0,0.5); }
+    .cta-button span, .cta-button i { position: relative; z-index: 1; }
+
+    .cta-button-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; background: transparent; color: rgba(255,255,255,0.82);
+      text-decoration: none; border-radius: 3px;
+      font-family: var(--font-body); font-weight: 400; font-size: 12.5px;
+      letter-spacing: 2px; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.38); transition: all 0.3s ease;
+    }
+    .cta-button-ghost:hover { border-color: rgba(255,255,255,0.9); color: #fff; transform: translateY(-3px); }
+
+    /* Stats bar */
+    .hero-stats {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+      display: flex; justify-content: center;
+      background: rgba(255,255,255,0.09); backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,0.13);
+    }
+    .hero-stat {
+      padding: 18px 44px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      opacity: 0; transform: translateY(10px);
+      animation: revealUp 0.7s var(--ease) forwards;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat:nth-child(1) { animation-delay: 1.1s; }
+    .hero-stat:nth-child(2) { animation-delay: 1.25s; }
+    .hero-stat:nth-child(3) { animation-delay: 1.4s; }
+    .hero-stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: #fff; display: block; line-height: 1; }
+    .hero-stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); display: block; margin-top: 5px; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 82px; left: 50%; transform: translateX(-50%);
+      z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 7px;
+      opacity: 0; animation: fadeIn 1s ease forwards 1.7s; cursor: pointer;
+    }
+    .scroll-indicator span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .scroll-line { width: 1px; height: 42px; background: linear-gradient(to bottom, rgba(255,255,255,0.65), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; transform: scaleY(1); transform-origin: top; } 50% { opacity: 1; transform: scaleY(0.6); transform-origin: top; } }
+    @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* ======== MARQUEE ======== */
+    .marquee-band { background: var(--accent); overflow: hidden; padding: 11px 0; }
+    .marquee-track { display: inline-flex; animation: marqueeScroll 22s linear infinite; }
+    .marquee-item { font-family: var(--font-body); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #fff; font-weight: 600; padding: 0 28px; }
+    .marquee-sep { color: rgba(255,255,255,0.4); font-size: 8px; }
+    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ======== GALLERY — Marble noir background ======== */
+    .gallery-section-dark {
+      background: url('./images/marbre_noir.jpg') center/cover fixed;
+      padding: 130px 0 110px; text-align: center; overflow: hidden; position: relative;
+    }
+    .gallery-section-dark::before {
+      content: ""; position: absolute; inset: 0;
+      background: rgba(0,0,0,0.68); z-index: 0;
+    }
+    .section-header-dark { position: relative; z-index: 1; padding: 0 40px; margin-bottom: 70px; }
+
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--font-body); font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .section-eyebrow::before, .section-eyebrow::after { content: ''; display: block; width: 26px; height: 1px; background: var(--accent); opacity: 0.55; }
+
+    .section-header-dark h2 {
+      font-family: var(--font-display); font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 300; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
+      text-shadow: 0 0 20px rgba(255,123,0,0.15);
+    }
+    .section-header-dark p { font-size: 1rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+    /* Carousel */
+    .carousel-luxe { overflow: hidden; padding: 10px 0 30px; position: relative; z-index: 1; }
+    .carousel-track { display: flex; gap: 28px; width: max-content; padding: 0 60px; }
+    .gallery-item-dark {
+      position: relative; flex: 0 0 285px; min-width: 285px;
+      aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.75);
+      transition: transform 0.5s var(--ease), box-shadow 0.5s ease;
+    }
+    .gallery-item-dark:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 36px 90px rgba(0,0,0,0.9); }
+    .gallery-item-dark img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); filter: brightness(0.92); }
+    .gallery-item-dark:hover img { transform: scale(1.07); filter: brightness(1); }
+    .gallery-overlay-dark {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px 24px; transform: translateY(55px);
+      transition: transform 0.5s var(--ease);
+    }
+    .gallery-item-dark:hover .gallery-overlay-dark { transform: translateY(0); }
+    .gallery-overlay-dark h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: #fff; margin-bottom: 5px; }
+    .gallery-overlay-dark p { font-size: 0.8rem; color: rgba(255,200,150,0.9); letter-spacing: 1.2px; text-transform: uppercase; }
+    .gallery-item-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--accent); transition: width 0.5s var(--ease); }
+    .gallery-item-dark:hover::after { width: 100%; }
+
+    /* ======== TESTIMONIALS — White / light marble ======== */
+    .testimonials-section {
+      background: var(--light); padding: 120px 40px;
+      position: relative; overflow: hidden;
+    }
+    /* Marble texture hint */
+    .testimonials-section::after {
+      content: ''; position: absolute; inset: 0;
+      background: url('images/marbre.jpg') center/cover no-repeat;
+      opacity: 0.035; pointer-events: none; z-index: 0;
+    }
+    /* Big decorative quote */
+    .testimonials-section::before {
+      content: '"'; position: absolute; top: -40px; right: 3%;
+      font-family: var(--font-display); font-size: 28vw;
+      color: rgba(255,123,0,0.04); line-height: 1;
+      pointer-events: none; user-select: none; z-index: 0;
+    }
+    .section-header-light { text-align: center; margin-bottom: 70px; position: relative; z-index: 1; }
+    .section-header-light .section-eyebrow { color: var(--accent); }
+    .section-header-light .section-eyebrow::before,
+    .section-header-light .section-eyebrow::after { background: var(--accent); }
+    .section-header-light h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 300; color: var(--dark); letter-spacing: 1px; margin-bottom: 12px; }
+    .section-header-light p { font-size: 1rem; color: var(--mid); }
+
+    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .testimonial-card {
+      background: var(--white); border: 1px solid rgba(0,0,0,0.07); border-radius: 6px;
+      padding: 36px 32px; position: relative; overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .testimonial-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px; background: var(--accent);
+      transform: scaleX(0); transition: transform 0.4s var(--ease); transform-origin: left;
+    }
+    .testimonial-card:hover::before { transform: scaleX(1); }
+    .testimonial-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+    .quote-icon { font-family: var(--font-display); font-size: 4.5rem; color: var(--accent); opacity: 0.16; line-height: 0.8; margin-bottom: -8px; display: block; }
+    .stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .stars i { font-size: 11px; color: var(--accent); }
+    .testimonial-content { font-size: 0.95rem; color: #4a4a4a; line-height: 1.85; font-style: italic; margin-bottom: 26px; }
+    .testimonial-divider { width: 32px; height: 2px; background: var(--accent); opacity: 0.4; margin-bottom: 20px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,123,0,0.22); }
+    .author-info h4 { font-size: 0.88rem; font-weight: 600; color: var(--dark); }
+    .author-info p { font-size: 0.77rem; color: var(--mid); margin: 0; }
+
+    /* ======== FOOTER ======== */
+    .footer { background: var(--dark); color: rgba(255,255,255,0.7); padding: 60px 40px 28px; }
+    .footer-content { max-width: 1200px; margin: 0 auto 48px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; align-items: start; }
+    .footer-logo img { width: 200px; height: auto; object-fit: contain; margin-bottom: 16px; }
+    .footer-tagline { font-size: 0.84rem; color: rgba(255,255,255,0.38); line-height: 1.8; max-width: 260px; }
+    .footer-col-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { color: rgba(255,255,255,0.42); text-decoration: none; font-size: 0.87rem; transition: color 0.25s, padding-left 0.25s; }
+    .footer-links a:hover { color: #fff; padding-left: 5px; }
+    .footer-social { display: flex; gap: 12px; margin-top: 6px; }
+    .footer-social a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; color: rgba(255,255,255,0.42); font-size: 13px; text-decoration: none; transition: all 0.3s; }
+    .footer-social a:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.07); font-size: 0.77rem; color: rgba(255,255,255,0.2); }
+    @media (max-width: 900px) { .footer-content { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 600px) { .footer-content { grid-template-columns: 1fr; gap: 28px; } .footer-bottom { flex-direction: column; gap: 8px; text-align: center; } }
+
+    /* ======== MODALS ======== */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; padding: 20px; }
+    .modal.show { display: flex !important; }
+    .modal-content { background: var(--white); border-radius: 6px; padding: 48px; max-width: 560px; width: 100%; position: relative; animation: modalIn 0.4s var(--ease) forwards; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(22px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .modal-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--dark); margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .modal-content h2 i { color: var(--accent); margin-right: 10px; font-size: 1.4rem; }
+    .close-modal { position: absolute; top: 18px; right: 18px; background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.08); color: rgba(0,0,0,0.38); width: 34px; height: 34px; border-radius: 50%; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .close-modal:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .info-section { margin-bottom: 24px; }
+    .info-section h3 { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .info-section p { color: rgba(26,26,26,0.62); font-size: 0.91rem; line-height: 1.8; }
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .info-list li { color: rgba(26,26,26,0.62); font-size: 0.89rem; line-height: 1.6; padding-left: 18px; position: relative; }
+    .info-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); opacity: 0.55; }
+    .info-list li strong { color: var(--dark); font-weight: 500; }
+    .info-logo { display: block; width: 170px; height: auto; margin: 6px auto 0; }
+    .logo-text { font-style: italic; color: var(--accent); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-item { display: flex; gap: 14px; align-items: flex-start; background: var(--light); padding: 18px; border-radius: 4px; }
+    .contact-item i { color: var(--accent); font-size: 1rem; margin-top: 3px; flex-shrink: 0; }
+    .contact-item strong { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
+    .contact-item p, .contact-item a { font-size: 0.86rem; color: var(--dark); text-decoration: none; word-break: break-all; overflow-wrap: anywhere; }
+    .contact-item a:hover { color: var(--accent); }
+    @media (max-width: 500px) { .contact-grid { grid-template-columns: 1fr; } .modal-content { padding: 28px 20px; } }
+
+    /* ======== TOAST ======== */
+    .toast { position: fixed; bottom: 28px; right: 28px; background: var(--dark); color: #fff; padding: 14px 22px; border-radius: 4px; font-size: 0.86rem; z-index: 99999; display: none; box-shadow: var(--shadow-md); }
+
+    /* ======== MOBILE POPUP ======== */
+    .mobile-popup { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(0,0,0,0.5); backdrop-filter: saturate(180%) blur(20px); z-index: 100000; }
+    .mobile-popup.show { display: flex; }
+    .mobile-popup-box { width: min(480px, 92vw); background: rgba(248,246,243,0.96); border: 1px solid rgba(255,255,255,0.5); border-radius: 18px; padding: 32px 26px 26px; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.3); animation: modalIn 0.35s var(--ease) forwards; }
+    .mobile-popup-badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(255,123,0,0.1); border: 1px solid rgba(255,123,0,0.2); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .mobile-popup-box h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 400; color: var(--dark); margin-bottom: 10px; }
+    .mobile-popup-box p { font-size: 0.9rem; color: var(--mid); line-height: 1.7; margin-bottom: 22px; }
+    .mobile-popup-close { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.1); border-radius: 50%; color: rgba(0,0,0,0.38); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .mobile-popup-close:hover { background: rgba(0,0,0,0.12); }
+    .mobile-popup-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 24px rgba(255,123,0,0.28); transition: all 0.3s; }
+    .mobile-popup-btn:hover { box-shadow: 0 12px 32px rgba(255,123,0,0.42); }
+
+    /* ======== SCROLL REVEAL ======== */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+
+    /* ======== MISC ======== */
+    img, video { max-width: 100%; height: auto; }
+    #transitionOverlay { position: fixed; inset: 0; background: var(--white); z-index: 999990; pointer-events: none; opacity: 0; }
+    @media (max-width: 600px) { .hero-stat { padding: 14px 22px; } .hero-stat-number { font-size: 1.5rem; } .testimonials-section { padding: 80px 20px; } .gallery-section-dark { padding: 90px 0 80px; } .carousel-track { padding: 0 20px; } }
+    @media (max-width: 380px) { .cta-button { padding: 14px 28px; } }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Popup -->
+  <div id="mobilePopup" class="mobile-popup" aria-hidden="true">
+    <div class="mobile-popup-box" role="dialog" aria-modal="true" aria-labelledby="mobilePopupTitle">
+      <button class="mobile-popup-close" aria-label="Fermer" type="button">&times;</button>
+      <div class="mobile-popup-badge">KaïroMod</div>
+      <h3 id="mobilePopupTitle">Meilleure expérience sur PC</h3>
+      <p>Le site est optimisé pour ordinateur. Sur téléphone, certaines fonctionnalités peuvent être limitées. Pour une expérience complète, ouvrez-le sur PC.</p>
+      <button class="mobile-popup-btn" type="button">Continuer</button>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="apple-nav" id="mainNav">
+    <div class="apple-nav-content">
+      <a href="index.html" class="apple-nav-logo">
+        <img src="./images/logo1.png" alt="KaïroMod">
+      </a>
+      <ul class="apple-nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="configurateur.html">Configurateur</a></li>
+        <li><a href="#" onclick="openModal('contactModal'); return false;">Contact</a></li>
+        <li><a href="#" onclick="openModal('infoModal'); return false;">Infos</a></li>
+        <li><a href="#" onclick="openModal('nh35Modal'); return false;">NH35</a></li>
+      </ul>
+      <div class="apple-nav-icons">
+        <a href="#" onclick="openCart()"><i class="fas fa-shopping-bag"></i></a>
+        <a href="#"><i class="fas fa-search"></i></a>
+        <div class="made-in-france-nav">
+          <img src="./images/drapeau-france.png" alt="FR">
+          <span>Assemblé en France</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-bg" id="heroBg"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Artisanat Horloger Français</div>
+      <h1 class="hero-title">
+        Créez votre montre d'exception
+        <span class="hero-title-line"></span>
+      </h1>
+      <p class="hero-subtitle">Des montres Seiko Mod sur mesure, conçues pour refléter votre style unique — assemblées à la main en France</p>
+      <div class="cta-wrapper">
+        <a href="configurateur.html" class="cta-button">
+          <span>Commencer la configuration</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#" onclick="openModal('infoModal'); return false;" class="cta-button-ghost">
+          <span>En savoir plus</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-number">NH35</span><span class="hero-stat-label">Mouvement Japonais</span></div>
+      <div class="hero-stat"><span class="hero-stat-number">100%</span><span class="hero-stat-label">Fait Main</span></div>
+      <div class="hero-stat"><span class="hero-stat-number">∞</span><span class="hero-stat-label">SAV à vie</span></div>
+    </div>
+
+    <div class="scroll-indicator" onclick="document.querySelector('.gallery-section-dark').scrollIntoView({behavior:'smooth'})">
+      <span>Découvrir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span class="marquee-item">KaïroMod</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Santos Custom</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Nautilus Mod</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Datejust Seiko</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Assemblé en France</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Mouvement NH35</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Sur Mesure</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">KaïroMod</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Santos Custom</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Nautilus Mod</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Datejust Seiko</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Assemblé en France</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Mouvement NH35</span><span class="marquee-sep">✦</span>
+      <span class="marquee-item">Sur Mesure</span><span class="marquee-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <section class="gallery-section-dark">
+    <div class="section-header-dark reveal">
+      <div class="section-eyebrow">Collection</div>
+      <h2>Nos Créations</h2>
+      <p>Découvrez quelques-unes de nos montres d'exception</p>
+    </div>
+    <div class="carousel-luxe">
+      <div class="carousel-track">
+        <div class="gallery-item-dark"><img src="./images/galerie/santos1.jpeg" alt="Santos Custom Steel"><div class="gallery-overlay-dark"><h3>Santos Custom Steel</h3><p>L'original Santos</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/datejust1.jpeg" alt="KaïroMod Datejust"><div class="gallery-overlay-dark"><h3>KaïroMod</h3><p>Argent & Or — Cadran Romain</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/nautilus1.jpeg" alt="Nautilus"><div class="gallery-overlay-dark"><h3>Nautilus</h3><p>Or Rose — Cadran Brown</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/santos2.jpeg" alt="Santos Acier"><div class="gallery-overlay-dark"><h3>Santos Acier</h3><p>Argent — Cadran Original</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/nautilus2.jpeg" alt="Nautilus Tiffany Blue"><div class="gallery-overlay-dark"><h3>Nautilus Tiffany Blue</h3><p>Bleu Tiffany — Acier poli</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/datejust3.jpeg" alt="Seiko Arabic Pink"><div class="gallery-overlay-dark"><h3>Seiko Arabic Pink</h3><p>Cadran Arabe rose</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/montre1.jpeg" alt="Collection Datejust"><div class="gallery-overlay-dark"><h3>Collection Datejust</h3><p>Who cares?</p></div></div>
+        <div class="gallery-item-dark"><img src="./images/galerie/montre2.jpeg" alt="Collection"><div class="gallery-overlay-dark"><h3>Collection</h3><p>Élégance & Robustesse</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="section-header-light reveal">
+      <div class="section-eyebrow">Témoignages</div>
+      <h2>Ce que nos clients disent</h2>
+      <p>Des témoignages de clients satisfaits</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <span class="quote-icon">"</span>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-content">"J'ai acheté ma première Seiko mod chez Antoine & Grégoire et je ne regrette absolument pas !! La qualité est exceptionnelle et le service client a été incroyable."</div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <img src="images/avis/tristan.jpg" alt="Tristan Girardot" class="author-avatar">
+          <div class="author-info"><h4>Tristan Girardot</h4><p>Rémondans-Vaivre, France</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <span class="quote-icon">"</span>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-content">"Je cherchais une montre totalement unique avec un mouvement automatique efficace et durable, j'ai trouvé éxactement ce qu'il me fallait !!."</div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <img src="images/avis/alexis.jpg" alt="Alexis Tripard" class="author-avatar">
+          <div class="author-info"><h4>Alexis Tripard</h4><p>Pont de Roide, France</p></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <span class="quote-icon">"</span>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-content">"Les matériaux ainsi que la customisations des montre est exceptionnelle, qualité au top et livraison raisonnable, je recommande fortement"</div>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">
+          <img src="images/avis/dylan.jpg" alt="Dylan Marsigaglia" class="author-avatar">
+          <div class="author-info"><h4>Dylan Marsigaglia</h4><p>Etouvans, France</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL CONTACT -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('contactModal')"><i class="fas fa-times"></i></button>
+      <h2><i class="fas fa-envelope"></i> Nous Contacter</h2>
+      <div class="contact-grid">
+        <div class="contact-item"><i class="fas fa-at"></i><div><strong>Email</strong><a href="/cdn-cgi/l/email-protection#f695999882979582d89d979f84999b9992b6919b979f9ad895999b"><span class="__cf_email__" data-cfemail="ed8e8283998c8e99c3868c849f82808289ad8a808c8481c38e8280">[email&#160;protected]</span></a></div></div>
+        <div class="contact-item"><i class="fas fa-clock"></i><div><strong>Horaires</strong><p>Lun-Ven 9h-18h<br>Sam 10h-17h</p></div></div>
+        <div class="contact-item"><i class="fas fa-phone"></i><div><strong>Téléphone</strong><p>+33 6 17 54 98 77</p><p>+33 6 17 54 98 77</p></div></div>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Lieu</strong><p>France</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL INFORMATIONS -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('infoModal')"><i class="fas fa-times"></i></button>
+      <h2><i class="fas fa-info-circle"></i> Informations</h2>
+      <div class="info-section">
+        <h3><i class="fas fa-tools"></i> Processus de Fabrication</h3>
+        <ul class="info-list">
+          <li><strong>Sélection des matériaux :</strong> Importation grâce à notre fournisseur</li>
+          <li><strong>Mouvement :</strong> Mouvement NH35 Seiko Japonais de grande qualité</li>
+          <li><strong>Assemblage :</strong> Fait main par nos soins</li>
+          <li><strong>Contrôle qualité :</strong> Tests rigoureux et précis</li>
+          <li><strong>Finitions :</strong> Vôtre montre dans un étuit à la remise et dans un état clinique</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h3><i class="fas fa-shield-alt"></i> Garanties</h3>
+        <ul class="info-list">
+          <li>Garantie sur le mouvement</li>
+          <li>Étanchéité garantie</li>
+          <li>Service après-vente à vie</li>
+        </ul>
+      </div>
+      <div class="info-section"><img src="./images/logo3.png" alt="KaïroMod" class="info-logo"></div>
+    </div>
+  </div>
+
+  <!-- MODAL NH35 -->
+  <div id="nh35Modal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('nh35Modal')"><i class="fas fa-times"></i></button>
+      <h2><i class="fas fa-cogs"></i> Mouvement NH35 Automatique</h2>
+      <div class="info-section">
+        <h3><i class="fas fa-clock"></i> Description</h3>
+        <p>Le <strong>Seiko NH35A</strong> est l'un des mouvements automatiques les plus fiables et précis du marché. Utilisé dans nos montres KaïroMod, il combine robustesse, fiabilité et élégance mécanique.</p>
+      </div>
+      <div class="info-section">
+        <h3><i class="fas fa-tachometer-alt"></i> Caractéristiques techniques</h3>
+        <ul class="info-list">
+          <li>Fréquence : <strong>21 600 alternances/heure (3 Hz)</strong></li>
+          <li>Réserve de marche : <strong>41 heures</strong></li>
+          <li>Remontage : <strong>automatique et manuel</strong></li>
+          <li>Rubis : <strong>24</strong></li>
+          <li>Précision : <strong>-20 à +40 sec/jour</strong></li>
+          <li>Résistance aux <strong>chocs & magnétisme</strong></li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h3><i class="fas fa-cogs"></i> <span class="logo-text">KaïroMod</span> — Pourquoi ce mouvement ?</h3>
+        <p>Le NH35 incarne le parfait équilibre entre <strong>tradition horlogère japonaise</strong> et <strong>technologie moderne</strong>. Sa fiabilité éprouvée et son entretien simplifié en font le cœur idéal de nos montres personnalisées.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="./images/logo2.png" alt="KaïroMod">
+        <p class="footer-tagline">Des montres Seiko Mod sur mesure, conçues avec passion et assemblées à la main en France.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="configurateur.html">Configurateur</a>
+          <a href="#" onclick="openModal('contactModal'); return false;">Contact</a>
+          <a href="#" onclick="openModal('infoModal'); return false;">Informations</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Nous suivre</div>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 KaïroMod. Tous droits réservés.</p>
+      <p>Assemblé avec passion en France 🇫🇷</p>
+    </div>
+  </footer>
+
+  <div id="transitionOverlay"></div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    /* Navbar scroll */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+    /* Hero bg zoom */
+    window.addEventListener('load', () => document.getElementById('heroSection').classList.add('loaded'));
+
+    /* Carousel */
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.carousel-luxe');
+      const track = document.querySelector('.carousel-track');
+      if (!container || !track) return;
+      Array.from(track.children).forEach(item => track.appendChild(item.cloneNode(true)));
+      let speed = 0.65, paused = false;
+      container.addEventListener('mouseenter', () => paused = true);
+      container.addEventListener('mouseleave', () => paused = false);
+      (function loop() {
+        if (!paused) {
+          container.scrollLeft += speed;
+          if (container.scrollLeft >= track.scrollWidth / 2) container.scrollLeft = 0;
+        }
+        requestAnimationFrame(loop);
+      })();
+    });
+
+    /* Scroll reveal */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* Modals */
+    function openModal(id) { const m = document.getElementById(id); if (m) { m.classList.add('show'); m.style.display = 'flex'; } }
+    function closeModal(id) { const m = document.getElementById(id); if (m) { m.classList.remove('show'); m.style.display = 'none'; } }
+    document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id)); });
+
+    /* Fade transitions */
+    document.querySelectorAll('a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !link.hasAttribute('onclick')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => { window.location = this.href; }, 380);
+        });
+      }
+    });
+    window.addEventListener('pageshow', e => { if (e.persisted) window.location.reload(); });
+
+    /* Mobile popup */
+    (function() {
+      const KEY = 'km_mobile_popup_last_shown_day';
+      const isPhone = () => /iPhone|iPod|Android.*Mobile|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.matchMedia('(max-width: 600px)').matches && ('ontouchstart' in window || navigator.maxTouchPoints > 0));
+      const todayParis = () => new Date().toLocaleDateString('fr-CA', { timeZone: 'Europe/Paris' });
+      const popup = document.getElementById('mobilePopup');
+      if (!popup || !isPhone()) return;
+      let last; try { last = localStorage.getItem(KEY); } catch(e) {}
+      if (last !== todayParis()) { popup.classList.add('show'); popup.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+      function hide() { popup.classList.remove('show'); popup.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; try { localStorage.setItem(KEY, todayParis()); } catch(e) {} }
+      popup.querySelector('.mobile-popup-close')?.addEventListener('click', hide);
+      popup.querySelector('.mobile-popup-btn')?.addEventListener('click', hide);
+      popup.addEventListener('click', e => { if (e.target === popup) hide(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+    })();
+  </script>
+</body>
+</html>

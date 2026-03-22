@@ -1,0 +1,12 @@
+{
+  "name": "kairomod-backend",
+  "version": "1.0.0",
+  "description": "KaïroMod — Vercel Serverless API",
+  "main": "api/create-checkout-session.js",
+  "dependencies": {
+    "stripe": "^14.21.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
