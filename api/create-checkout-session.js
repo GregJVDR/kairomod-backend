@@ -1,0 +1,156 @@
+// ================================================================
+//  KAÏROMOD — api/create-checkout-session.js
+//  Vercel Serverless Function
+// ================================================================
+
+const Stripe = require('stripe');
+
+module.exports = async function handler(req, res) {
+  // ── CORS ─────────────────────────────────────────────────────
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST')   return res.status(405).json({ error: 'Method not allowed' });
+
+  // ── VALIDATION ────────────────────────────────────────────────
+  const { cartItems, origin, customerEmail, customerName } = req.body || {};
+
+  if (!cartItems || cartItems.length === 0) {
+    return res.status(400).json({ error: 'Panier vide' });
+  }
+
+  // ── VÉRIF CLÉ STRIPE ─────────────────────────────────────────
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error('STRIPE_SECRET_KEY manquante');
+    return res.status(500).json({ error: 'Configuration serveur manquante (STRIPE_SECRET_KEY)' });
+  }
+
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+  // ── SITE URL ──────────────────────────────────────────────────
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+    || (origin && origin !== 'null' ? origin : null)
+    || 'https://kairomod.fr';
+
+  try {
+    // ── LINE ITEMS ────────────────────────────────────────────
+    const line_items = cartItems.map((item) => {
+      const configLines = Object.entries(item.elements || {})
+        .map(([cat, key]) => `${capitalize(cat)} : ${key}`)
+        .join(' | ');
+
+      return {
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: `KaïroMod — ${(item.type || 'Montre').toUpperCase()}`,
+            description: configLines || 'Montre Seiko Mod sur mesure',
+            // images: item.image ? [item.image] : [],  // décommenter si images publiques
+          },
+          unit_amount: Math.round((item.total || 0) * 100),
+        },
+        quantity: 1,
+      };
+    });
+
+    // ── SESSION STRIPE ────────────────────────────────────────
+    const sessionParams = {
+      mode: 'payment',
+      line_items,
+      billing_address_collection: 'required',
+      shipping_address_collection: {
+        allowed_countries: ['FR','BE','CH','LU','MC','DE','ES','IT','NL','PT','GB'],
+      },
+      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url:  `${siteUrl}/cancel.html`,
+      metadata: {
+        customer_name: customerName || '',
+        cart_items:    cartItems.length.toString(),
+      },
+      payment_method_types: ['card'],
+      locale: 'fr',
+    };
+
+    // Pré-remplir l'email si connecté
+    if (customerEmail && customerEmail !== 'null') {
+      sessionParams.customer_email = customerEmail;
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
+
+    // ── EMAILS VIA EMAILJS REST ───────────────────────────────
+    const cartSummary  = buildCartSummary(cartItems);
+    const totalAmount  = cartItems.reduce((s, i) => s + (i.total || 0), 0);
+    const orderDate    = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+
+    // Email client
+    if (customerEmail && customerEmail !== 'null' && process.env.EMAILJS_USER_ID) {
+      await sendEmailJS({
+        service_id:  process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_CLIENT,
+        user_id:     process.env.EMAILJS_USER_ID,
+        template_params: {
+          to_email:     customerEmail,
+          to_name:      customerName || 'Client KaïroMod',
+          cart_summary: cartSummary,
+          total_price:  totalAmount.toLocaleString('fr-FR') + ' €',
+          order_date:   orderDate,
+        }
+      }).catch(e => console.warn('[EmailJS client]', e.message));
+    }
+
+    // Email admin
+    if (process.env.ADMIN_EMAIL && process.env.EMAILJS_USER_ID) {
+      await sendEmailJS({
+        service_id:  process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_ADMIN,
+        user_id:     process.env.EMAILJS_USER_ID,
+        template_params: {
+          to_email:       process.env.ADMIN_EMAIL,
+          from_name:      customerName  || 'Inconnu',
+          from_email:     customerEmail || 'Non renseigné',
+          cart_summary:   cartSummary,
+          total_price:    totalAmount.toLocaleString('fr-FR') + ' €',
+          stripe_session: session.id,
+          order_date:     orderDate,
+        }
+      }).catch(e => console.warn('[EmailJS admin]', e.message));
+    }
+
+    // ── RÉPONSE ───────────────────────────────────────────────
+    return res.status(200).json({ url: session.url, sessionId: session.id });
+
+  } catch (err) {
+    console.error('[Stripe error]', err.message);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+// ── HELPERS ──────────────────────────────────────────────────────
+
+async function sendEmailJS(payload) {
+  const r = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify(payload),
+  });
+  if (!r.ok) {
+    const txt = await r.text();
+    throw new Error(`EmailJS ${r.status}: ${txt}`);
+  }
+}
+
+function buildCartSummary(cartItems) {
+  return cartItems.map((item, i) => {
+    const lines = Object.entries(item.elements || {})
+      .map(([cat, key]) => `  • ${capitalize(cat)} : ${key}`)
+      .join('\n');
+    return `Montre #${i + 1} — ${(item.type || '').toUpperCase()}\n${lines}\n  → ${(item.total || 0).toLocaleString('fr-FR')} €`;
+  }).join('\n\n');
+}
+
+function capitalize(s) {
+  return (s || '').charAt(0).toUpperCase() + (s || '').slice(1);
+}
