@@ -134,8 +134,10 @@ async function sendEmailJS(payload) {
   const r = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify(payload),
-    accessToken: process.env.EMAILJS_PRIVATE_KEY
+    body: JSON.stringify({
+      ...payload,
+      accessToken: process.env.EMAILJS_PRIVATE_KEY
+    }),
   });
   if (!r.ok) {
     const txt = await r.text();
