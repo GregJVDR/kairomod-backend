@@ -5,8 +5,7 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-KEQ0W8N4HY');
+  gtag('js', new Date()); gtag('config', 'G-KEQ0W8N4HY');
 </script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,15 +15,13 @@
 <link rel="shortcut icon" href="./images/drapeau-france.png" type="image/png">
 <link rel="apple-touch-icon" href="./images/drapeau-france.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
 
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HS7L3KK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<!-- ====== NAVBAR ====== -->
+<!-- ══════ NAVBAR ══════ -->
 <nav class="km-nav" id="mainNav">
   <div class="km-nav-inner">
     <a href="index.html" class="km-nav-logo">
@@ -40,9 +37,8 @@
     <div class="km-nav-actions">
       <button class="km-cart-btn" onclick="openCart()" aria-label="Panier">
         <i class="fas fa-shopping-bag"></i>
-        <span class="km-cart-badge" id="cartBadge" style="display:none">0</span>
+        <span class="km-cart-badge" id="cartBadge">0</span>
       </button>
-      <!-- Auth button: shows login icon when logged out, avatar when logged in -->
       <button class="km-auth-nav-btn" id="authNavBtn" onclick="toggleAuthNav()" title="Mon compte">
         <i class="fas fa-user-circle" id="authNavIcon"></i>
         <span class="km-auth-nav-label" id="authNavLabel">Connexion</span>
@@ -51,17 +47,18 @@
   </div>
 </nav>
 
-<!-- ====== PAGE WRAPPER ====== -->
+<!-- ══════ PAGE ══════ -->
 <div class="km-page">
 
   <!-- HEADER -->
   <header class="km-header">
-    <div class="km-header-eyebrow">Créez votre garde-temps</div>
+    <div class="km-header-eyebrow">
+      <span></span>Créez votre garde-temps<span></span>
+    </div>
     <h1 class="km-header-title">Configurateur <em>KaïroMod</em></h1>
-    <p class="km-header-sub">Sélectionnez un modèle pour commencer votre personnalisation</p>
+    <p class="km-header-sub">Choisissez votre modèle, personnalisez chaque composant</p>
 
-    <!-- MODEL TABS -->
-    <div class="km-tabs" id="modelTabs">
+    <div class="km-tabs">
       <button class="km-tab" data-watch="santos" onclick="switchWatchType('santos')">
         <div class="km-tab-icon"><i class="fas fa-square"></i></div>
         <div class="km-tab-text">
@@ -86,134 +83,119 @@
     </div>
 
     <p id="chooseModelHint" class="km-hint">
-      <i class="fas fa-arrow-up"></i> Choisissez un modèle ci-dessus pour commencer
+      <i class="fas fa-hand-pointer"></i> Sélectionnez un modèle ci-dessus pour commencer
     </p>
   </header>
 
   <!-- MAIN GRID -->
   <div class="km-grid" id="mainGrid">
 
-    <!-- LEFT: Watch preview + price -->
+    <!-- ── GAUCHE : Aperçu montre ── -->
     <aside class="km-watch-col">
-      <div class="km-watch-card" id="watchCard">
+
+      <div class="km-watch-card">
         <div class="km-watch-display">
-          <img id="watchImage" class="km-watch-img" src="" alt="Montre sélectionnée"/>
+          <img id="watchImage" class="km-watch-img" src="" alt="Aperçu montre"/>
           <div id="placeholderText" class="km-watch-placeholder">
             <i class="fas fa-clock"></i>
             <p>Sélectionnez un modèle</p>
           </div>
         </div>
         <div class="km-price-bar">
-          <span class="km-price-label">Prix Total</span>
+          <span class="km-price-label">Prix total estimé</span>
           <span class="km-price-value" id="totalPrice">0 €</span>
         </div>
       </div>
 
-      <!-- Selected components preview -->
+      <!-- Miniatures composants sélectionnés -->
       <div id="selectedComponentsPreview" class="km-components-preview"></div>
 
-      <!-- Add to cart button (mobile: shows here; desktop: in config col) -->
-      <div class="km-cart-cta km-cart-cta--mobile">
+      <!-- CTA mobile (sous l'image) -->
+      <div class="km-cart-cta-mobile">
         <button id="addToCartBtnMobile" class="km-add-btn" disabled onclick="addToCart()">
           <i class="fas fa-cart-plus"></i>
           <span id="orderBtnTextMobile">Sélectionnez toutes les options</span>
         </button>
       </div>
+
     </aside>
 
-    <!-- RIGHT: Config options -->
+    <!-- ── DROITE : Configuration ── -->
     <section class="km-config-col">
       <div class="km-config-card">
+
+        <!-- En-tête sticky -->
         <div class="km-config-header">
-          <i class="fas fa-sliders-h"></i>
-          <h2>Configuration</h2>
-        </div>
-
-        <!-- SCROLLABLE OPTIONS AREA -->
-        <div class="km-config-scroll">
-
-        <!-- CARRURE -->
-        <div class="km-option-group hidden" id="group-carrure">
-          <div class="km-option-label">
-            <i class="fas fa-square"></i>
-            <span>Carrure</span>
+          <div class="km-config-header-left">
+            <i class="fas fa-sliders-h"></i>
+            <h2>Configuration</h2>
           </div>
-          <div class="km-options-grid" id="carrureOptions"></div>
-          <div class="km-selection-info">
-            <span id="carrureName" class="km-sel-name">—</span>
-            <span id="carrurePrice" class="km-sel-price">0 €</span>
+          <div class="km-config-progress" id="configProgress">
+            <span id="progressText">0/0</span>
           </div>
         </div>
 
-        <!-- CADRAN -->
-        <div class="km-option-group hidden" id="group-cadran">
-          <div class="km-option-label">
-            <i class="fas fa-circle"></i>
-            <span>Cadran <em class="km-note">(avec logo KaïroMod)</em></span>
-          </div>
-          <div class="km-options-grid" id="cadranOptions"></div>
-          <div class="km-selection-info">
-            <span id="cadranName" class="km-sel-name">—</span>
-            <span id="cadranPrice" class="km-sel-price">0 €</span>
-          </div>
-        </div>
+        <!-- Zone scrollable -->
+        <div class="km-config-scroll" id="configScroll">
 
-        <!-- AIGUILLES -->
-        <div class="km-option-group hidden" id="group-aiguilles">
-          <div class="km-option-label">
-            <i class="fas fa-long-arrow-alt-up"></i>
-            <span>Aiguilles</span>
+          <div class="km-option-group hidden" id="group-carrure">
+            <div class="km-option-label"><i class="fas fa-square"></i><span>Carrure</span></div>
+            <div class="km-options-grid" id="carrureOptions"></div>
+            <div class="km-selection-info">
+              <span id="carrureName" class="km-sel-name">—</span>
+              <span id="carrurePrice" class="km-sel-price">0 €</span>
+            </div>
           </div>
-          <div class="km-options-grid" id="aiguillesOptions"></div>
-          <div class="km-selection-info">
-            <span id="aiguillesName" class="km-sel-name">—</span>
-            <span id="aiguillesPrice" class="km-sel-price">0 €</span>
-          </div>
-        </div>
 
-        <!-- BRACELET -->
-        <div class="km-option-group hidden" id="group-bracelet">
-          <div class="km-option-label">
-            <i class="fas fa-link"></i>
-            <span>Bracelet</span>
+          <div class="km-option-group hidden" id="group-cadran">
+            <div class="km-option-label"><i class="fas fa-circle"></i><span>Cadran <em class="km-note">(logo KaïroMod inclus)</em></span></div>
+            <div class="km-options-grid" id="cadranOptions"></div>
+            <div class="km-selection-info">
+              <span id="cadranName" class="km-sel-name">—</span>
+              <span id="cadranPrice" class="km-sel-price">0 €</span>
+            </div>
           </div>
-          <div class="km-options-grid" id="braceletOptions"></div>
-          <div class="km-selection-info">
-            <span id="braceletName" class="km-sel-name">—</span>
-            <span id="braceletPrice" class="km-sel-price">0 €</span>
-          </div>
-        </div>
 
-        <!-- FOND / ROTOR -->
-        <div class="km-option-group hidden" id="group-fond">
-          <div class="km-option-label">
-            <i class="fas fa-shield-alt"></i>
-            <span>Masse Oscillante</span>
+          <div class="km-option-group hidden" id="group-aiguilles">
+            <div class="km-option-label"><i class="fas fa-long-arrow-alt-up"></i><span>Aiguilles</span></div>
+            <div class="km-options-grid" id="aiguillesOptions"></div>
+            <div class="km-selection-info">
+              <span id="aiguillesName" class="km-sel-name">—</span>
+              <span id="aiguillesPrice" class="km-sel-price">0 €</span>
+            </div>
           </div>
-          <div class="km-options-grid" id="fondOptions"></div>
-          <div class="km-selection-info">
-            <span id="fondName" class="km-sel-name">—</span>
-            <span id="fondPrice" class="km-sel-price">0 €</span>
-          </div>
-        </div>
 
-        <!-- REMONTOIR -->
-        <div class="km-option-group hidden" id="group-remontoir">
-          <div class="km-option-label">
-            <i class="fas fa-sync-alt"></i>
-            <span>Remontoir</span>
+          <div class="km-option-group hidden" id="group-bracelet">
+            <div class="km-option-label"><i class="fas fa-link"></i><span>Bracelet</span></div>
+            <div class="km-options-grid" id="braceletOptions"></div>
+            <div class="km-selection-info">
+              <span id="braceletName" class="km-sel-name">—</span>
+              <span id="braceletPrice" class="km-sel-price">0 €</span>
+            </div>
           </div>
-          <div class="km-options-grid" id="remontoirOptions"></div>
-          <div class="km-selection-info">
-            <span id="remontoirName" class="km-sel-name">—</span>
-            <span id="remontoirPrice" class="km-sel-price">0 €</span>
+
+          <div class="km-option-group hidden" id="group-fond">
+            <div class="km-option-label"><i class="fas fa-shield-alt"></i><span>Masse Oscillante</span></div>
+            <div class="km-options-grid" id="fondOptions"></div>
+            <div class="km-selection-info">
+              <span id="fondName" class="km-sel-name">—</span>
+              <span id="fondPrice" class="km-sel-price">0 €</span>
+            </div>
           </div>
-        </div>
+
+          <div class="km-option-group hidden" id="group-remontoir">
+            <div class="km-option-label"><i class="fas fa-sync-alt"></i><span>Remontoir</span></div>
+            <div class="km-options-grid" id="remontoirOptions"></div>
+            <div class="km-selection-info">
+              <span id="remontoirName" class="km-sel-name">—</span>
+              <span id="remontoirPrice" class="km-sel-price">0 €</span>
+            </div>
+          </div>
 
         </div><!-- /km-config-scroll -->
 
-        <!-- STICKY FOOTER WITH ADD TO CART (desktop) -->
-        <div class="km-config-footer km-cart-cta--desktop">
+        <!-- Pied sticky : bouton ajouter au panier -->
+        <div class="km-config-footer">
           <button id="addToCartBtn" class="km-add-btn" disabled onclick="addToCart()">
             <i class="fas fa-cart-plus"></i>
             <span id="orderBtnText">Sélectionnez toutes les options</span>
@@ -222,23 +204,20 @@
 
       </div>
     </section>
+
   </div><!-- /km-grid -->
 </div><!-- /km-page -->
 
-<!-- ============================
-     MODALS
-============================= -->
+<!-- ══════ MODALS ══════ -->
 
-<!-- CART MODAL -->
+<!-- PANIER -->
 <div id="cartModal" class="km-modal">
   <div class="km-modal-box km-modal-cart">
     <button class="km-modal-close" onclick="closeModal('cartModal')"><i class="fas fa-times"></i></button>
     <h2 class="km-modal-title"><i class="fas fa-shopping-bag"></i> Votre Panier</h2>
     <div id="cartItemsContainer" class="km-cart-items"></div>
     <div class="km-cart-footer">
-      <div class="km-cart-total">
-        Total : <strong id="cartTotal">0 €</strong>
-      </div>
+      <div class="km-cart-total">Total : <strong id="cartTotal">0 €</strong></div>
       <button class="km-checkout-btn" onclick="goToPayment()">
         <i class="fas fa-lock"></i> Passer commande
       </button>
@@ -246,75 +225,77 @@
   </div>
 </div>
 
-<!-- ORDER / SELECTION MODAL -->
-<div id="selectionModal" class="km-modal">
-  <div class="km-modal-box km-modal-order">
-    <button class="km-modal-close" onclick="closeModal('selectionModal')"><i class="fas fa-times"></i></button>
-    <h2 class="km-modal-title"><i class="fas fa-check-circle"></i> Votre sélection</h2>
-    <div id="orderSummary" class="km-order-summary"></div>
-    <form id="orderForm" class="km-order-form" onsubmit="submitOrder(event)">
-      <div class="km-form-row">
-        <div class="km-form-group">
-          <label><i class="fas fa-user"></i> Nom complet <span class="km-req">*</span></label>
-          <input type="text" name="name" required placeholder="Votre nom"/>
-        </div>
-        <div class="km-form-group">
-          <label><i class="fas fa-phone"></i> Téléphone</label>
-          <input type="tel" name="phone" placeholder="+33 6 ..."/>
-        </div>
+<!-- AUTH -->
+<div id="authModal" class="km-modal">
+  <div class="km-modal-box km-modal-auth">
+    <button class="km-modal-close" onclick="closeModal('authModal')"><i class="fas fa-times"></i></button>
+    <div class="km-auth-tabs">
+      <button class="km-auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Connexion</button>
+      <button class="km-auth-tab" id="registerTab" onclick="switchAuthTab('register')">Créer un compte</button>
+    </div>
+    <div id="loginForm" class="km-auth-form">
+      <div class="km-auth-icon"><i class="fas fa-lock"></i></div>
+      <h2 class="km-auth-form-title">Bon retour !</h2>
+      <p class="km-auth-sub">Connectez-vous pour accéder à votre espace</p>
+      <div class="km-form-group">
+        <label><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="loginEmail" placeholder="votre@email.com"/>
       </div>
       <div class="km-form-group">
-        <label><i class="fas fa-envelope"></i> Email <span class="km-req">*</span></label>
-        <input type="email" id="email" name="email" required placeholder="exemple@mail.com"/>
+        <label><i class="fas fa-lock"></i> Mot de passe</label>
+        <input type="password" id="loginPassword" placeholder="••••••••"/>
+      </div>
+      <div id="loginError" class="km-auth-error" style="display:none"></div>
+      <button class="km-btn-primary km-auth-submit" onclick="doLogin()">
+        <i class="fas fa-sign-in-alt"></i> Se connecter
+      </button>
+      <p class="km-auth-switch">Pas encore de compte ? <a href="#" onclick="switchAuthTab('register'); return false;">S'inscrire</a></p>
+    </div>
+    <div id="registerForm" class="km-auth-form" style="display:none">
+      <div class="km-auth-icon"><i class="fas fa-user-plus"></i></div>
+      <h2 class="km-auth-form-title">Créer un compte</h2>
+      <p class="km-auth-sub">Rejoignez KaïroMod pour commander</p>
+      <div class="km-form-group">
+        <label><i class="fas fa-user"></i> Nom complet</label>
+        <input type="text" id="registerName" placeholder="Votre nom"/>
       </div>
       <div class="km-form-group">
-        <label><i class="fas fa-envelope"></i> Confirmez votre email <span class="km-req">*</span></label>
-        <input type="email" id="confirmEmail" name="confirmEmail" required placeholder="Répétez votre email"/>
-        <small id="emailError" class="km-email-error" style="display:none">⚠️ Les adresses e-mail ne correspondent pas.</small>
+        <label><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="registerEmail" placeholder="votre@email.com"/>
       </div>
       <div class="km-form-group">
-        <label><i class="fas fa-location-dot"></i> Adresse de livraison</label>
-        <textarea name="address" rows="2" placeholder="Rue, ville, code postal..."></textarea>
+        <label><i class="fas fa-lock"></i> Mot de passe</label>
+        <input type="password" id="registerPassword" placeholder="8 caractères minimum"/>
       </div>
-      <div class="km-form-group">
-        <label><i class="fas fa-note-sticky"></i> Instructions</label>
-        <textarea name="instructions" rows="2" placeholder="Tour de poignet, finition spéciale..."></textarea>
-      </div>
-      <div class="km-form-group">
-        <label><i class="fas fa-credit-card"></i> Moyen de paiement <span class="km-req">*</span></label>
-        <div class="km-payment-opts">
-          <label class="km-pay-btn">
-            <input type="radio" name="payment" value="Carte bancaire" required>
-            <i class="fas fa-credit-card"></i> Carte Bancaire
-          </label>
-          <label class="km-pay-btn">
-            <input type="radio" name="payment" value="PayPal" required>
-            <i class="fab fa-paypal"></i> PayPal
-          </label>
-        </div>
-      </div>
-      <div class="km-form-actions">
-        <button type="button" class="km-btn-ghost" onclick="closeModal('selectionModal')">
-          <i class="fas fa-arrow-left"></i> Retour
-        </button>
-        <button id="confirmOrderBtn" type="submit" class="km-btn-primary">
-          <i class="fas fa-paper-plane"></i> Envoyer la commande
-        </button>
-      </div>
-    </form>
+      <div id="registerError" class="km-auth-error" style="display:none"></div>
+      <button class="km-btn-primary km-auth-submit" onclick="doRegister()">
+        <i class="fas fa-user-plus"></i> Créer mon compte
+      </button>
+      <p class="km-auth-switch">Déjà un compte ? <a href="#" onclick="switchAuthTab('login'); return false;">Se connecter</a></p>
+    </div>
   </div>
 </div>
 
-<!-- CONTACT MODAL -->
+<!-- USER MENU -->
+<div id="userMenu" class="km-user-menu" style="display:none">
+  <div class="km-user-menu-box">
+    <p class="km-user-name" id="userDisplayName"></p>
+    <p class="km-user-email" id="userDisplayEmail"></p>
+    <hr style="border:none;border-top:1px solid rgba(0,0,0,0.08);margin:12px 0;">
+    <button class="km-user-menu-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Se déconnecter</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
 <div id="contactModal" class="km-modal">
   <div class="km-modal-box">
     <button class="km-modal-close" onclick="closeModal('contactModal')"><i class="fas fa-times"></i></button>
     <h2 class="km-modal-title"><i class="fas fa-envelope"></i> Nous Contacter</h2>
     <div class="km-contact-grid">
-      <div class="km-contact-item"><i class="fas fa-at"></i><div><strong>Email</strong><a href="/cdn-cgi/l/email-protection#a1c2cecfd5c0c2d58fcac0c8d3cecccec5e1c6ccc0c8cd8fc2cecc"><span class="__cf_email__" data-cfemail="9dfef2f3e9fcfee9b3f6fcf4eff2f0f2f9ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</span></a></div></div>
+      <div class="km-contact-item"><i class="fas fa-at"></i><div><strong>Email</strong><a href="mailto:contact@kairomod.fr">contact@kairomod.fr</a></div></div>
       <div class="km-contact-item"><i class="fas fa-clock"></i><div><strong>Horaires</strong><p>7j/7 — 24h/24</p></div></div>
       <div class="km-contact-item"><i class="fas fa-phone"></i><div><strong>Téléphone</strong><p>+33 6 17 54 98 77</p></div></div>
-      <div class="km-contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Lieu</strong><p>France</p></div></div>
+      <div class="km-contact-item"><i class="fas fa-map-marker-alt"></i><div><strong>Lieu</strong><p>France 🇫🇷</p></div></div>
     </div>
     <div class="km-faq">
       <h3>Questions fréquentes</h3>
@@ -325,7 +306,7 @@
   </div>
 </div>
 
-<!-- INFO MODAL -->
+<!-- INFOS -->
 <div id="infoModal" class="km-modal">
   <div class="km-modal-box">
     <button class="km-modal-close" onclick="closeModal('infoModal')"><i class="fas fa-times"></i></button>
@@ -351,7 +332,7 @@
   </div>
 </div>
 
-<!-- NH35 MODAL -->
+<!-- NH35 -->
 <div id="nh35Modal" class="km-modal">
   <div class="km-modal-box">
     <button class="km-modal-close" onclick="closeModal('nh35Modal')"><i class="fas fa-times"></i></button>
@@ -361,20 +342,19 @@
       <p>Le <strong>Seiko NH35A</strong> est l'un des mouvements automatiques les plus fiables du marché. Il combine robustesse, fiabilité et élégance mécanique.</p>
     </div>
     <div class="km-info-section">
-      <h3>Caractéristiques techniques</h3>
+      <h3>Caractéristiques</h3>
       <ul class="km-info-list">
-        <li>Fréquence : <strong>21 600 alt./heure (3 Hz)</strong></li>
+        <li>Fréquence : <strong>21 600 alt./heure</strong></li>
         <li>Réserve de marche : <strong>41 heures</strong></li>
         <li>Remontage : <strong>automatique et manuel</strong></li>
         <li>Rubis : <strong>24</strong></li>
         <li>Précision : <strong>−20 à +40 sec/jour</strong></li>
-        <li>Résistance aux <strong>chocs & magnétisme</strong></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- IMAGE ZOOM MODAL -->
+<!-- IMAGE ZOOM -->
 <div id="imageModal" class="km-modal">
   <div class="km-modal-box km-modal-zoom">
     <button class="km-modal-close" onclick="closeModal('imageModal')"><i class="fas fa-times"></i></button>
@@ -384,90 +364,17 @@
   </div>
 </div>
 
-<!-- ============================
-     AUTH MODAL (Login / Register)
-============================= -->
-<div id="authModal" class="km-modal">
-  <div class="km-modal-box km-modal-auth">
-    <button class="km-modal-close" onclick="closeModal('authModal')"><i class="fas fa-times"></i></button>
-
-    <!-- Tabs -->
-    <div class="km-auth-tabs">
-      <button class="km-auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Connexion</button>
-      <button class="km-auth-tab" id="registerTab" onclick="switchAuthTab('register')">Créer un compte</button>
-    </div>
-
-    <!-- LOGIN FORM -->
-    <div id="loginForm" class="km-auth-form">
-      <div class="km-auth-icon"><i class="fas fa-lock"></i></div>
-      <h2 class="km-modal-title" style="border:none;margin-bottom:6px;padding-bottom:0;">Bon retour !</h2>
-      <p class="km-auth-sub">Connectez-vous pour accéder à votre espace</p>
-      <div class="km-form-group" style="margin-top:20px;">
-        <label><i class="fas fa-envelope"></i> Email</label>
-        <input type="email" id="loginEmail" placeholder="votre@email.com"/>
-      </div>
-      <div class="km-form-group">
-        <label><i class="fas fa-lock"></i> Mot de passe</label>
-        <input type="password" id="loginPassword" placeholder="••••••••"/>
-      </div>
-      <div id="loginError" class="km-auth-error" style="display:none"></div>
-      <button class="km-btn-primary km-auth-submit" onclick="doLogin()">
-        <i class="fas fa-sign-in-alt"></i> Se connecter
-      </button>
-      <p class="km-auth-switch">Pas encore de compte ? <a href="#" onclick="switchAuthTab('register'); return false;">S'inscrire</a></p>
-    </div>
-
-    <!-- REGISTER FORM -->
-    <div id="registerForm" class="km-auth-form" style="display:none">
-      <div class="km-auth-icon"><i class="fas fa-user-plus"></i></div>
-      <h2 class="km-modal-title" style="border:none;margin-bottom:6px;padding-bottom:0;">Créer un compte</h2>
-      <p class="km-auth-sub">Rejoignez KaïroMod pour commander votre montre</p>
-      <div class="km-form-group" style="margin-top:20px;">
-        <label><i class="fas fa-user"></i> Nom complet</label>
-        <input type="text" id="registerName" placeholder="Votre nom"/>
-      </div>
-      <div class="km-form-group">
-        <label><i class="fas fa-envelope"></i> Email</label>
-        <input type="email" id="registerEmail" placeholder="votre@email.com"/>
-      </div>
-      <div class="km-form-group">
-        <label><i class="fas fa-lock"></i> Mot de passe</label>
-        <input type="password" id="registerPassword" placeholder="8 caractères minimum"/>
-      </div>
-      <div id="registerError" class="km-auth-error" style="display:none"></div>
-      <button class="km-btn-primary km-auth-submit" onclick="doRegister()">
-        <i class="fas fa-user-plus"></i> Créer mon compte
-      </button>
-      <p class="km-auth-switch">Déjà un compte ? <a href="#" onclick="switchAuthTab('login'); return false;">Se connecter</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- USER MENU (shown when logged in) -->
-<div id="userMenu" class="km-user-menu" style="display:none">
-  <div class="km-user-menu-box">
-    <p class="km-user-name" id="userDisplayName"></p>
-    <p class="km-user-email" id="userDisplayEmail"></p>
-    <hr style="border:none;border-top:1px solid rgba(0,0,0,0.08);margin:12px 0;">
-    <button class="km-user-menu-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Se déconnecter</button>
-  </div>
-</div>
-
-<!-- ============================
-     CART ANIMATION OVERLAY (flying item)
-============================= -->
+<!-- Fly-to-cart element -->
 <div id="cartFlyEl" class="km-fly-item"></div>
-
-<!-- ORDER WARNING -->
-<div id="orderWarning" class="km-order-warning"></div>
-
-<!-- TOAST -->
+<!-- Toast -->
 <div id="toast" class="km-toast"></div>
+<!-- Order warning -->
+<div id="orderWarning"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="script.js"></script>
-<!-- Supabase JS v2 -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="auth.js"></script>
+
 </body>
 </html>
